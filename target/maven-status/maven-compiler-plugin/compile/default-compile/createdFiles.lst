@@ -1,0 +1,14 @@
+com\imt\framework\web\tuto\entities\AllergeneEnum.class
+com\imt\framework\web\tuto\repositories\PlatRepository.class
+com\imt\framework\web\tuto\repositories\CommandeRepository.class
+com\imt\framework\web\tuto\TutoApplication.class
+com\imt\framework\web\tuto\resources\UtilisateurResource.class
+com\imt\framework\web\tuto\entities\CategorieEnum.class
+com\imt\framework\web\tuto\repositories\UtilisateurRepository.class
+com\imt\framework\web\tuto\resources\CommandeResource.class
+com\imt\framework\web\tuto\entities\Plat.class
+com\imt\framework\web\tuto\config\JerseyConfig.class
+com\imt\framework\web\tuto\entities\Commande.class
+com\imt\framework\web\tuto\entities\Utilisateur.class
+com\imt\framework\web\tuto\resources\PlatResource.class
+com\imt\framework\web\tuto\entities\EtatEnum.class
