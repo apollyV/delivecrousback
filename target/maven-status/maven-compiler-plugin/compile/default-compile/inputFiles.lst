@@ -6,9 +6,14 @@ C:\IMT\Back\Tuto-Web-service\src\main\java\com\imt\framework\web\tuto\config\Jer
 C:\IMT\Back\Tuto-Web-service\src\main\java\com\imt\framework\web\tuto\repositories\PlatRepository.java
 C:\IMT\Back\Tuto-Web-service\src\main\java\com\imt\framework\web\tuto\entities\AllergeneEnum.java
 C:\IMT\Back\Tuto-Web-service\src\main\java\com\imt\framework\web\tuto\resources\UtilisateurResource.java
+C:\IMT\Back\Tuto-Web-service\src\main\java\com\imt\framework\web\tuto\annotation\RequiresAuth.java
 C:\IMT\Back\Tuto-Web-service\src\main\java\com\imt\framework\web\tuto\entities\Commande.java
 C:\IMT\Back\Tuto-Web-service\src\main\java\com\imt\framework\web\tuto\repositories\UtilisateurRepository.java
+C:\IMT\Back\Tuto-Web-service\src\main\java\com\imt\framework\web\tuto\resources\TokenResource.java
+C:\IMT\Back\Tuto-Web-service\src\main\java\com\imt\framework\web\tuto\service\TokenService.java
 C:\IMT\Back\Tuto-Web-service\src\main\java\com\imt\framework\web\tuto\entities\CategorieEnum.java
 C:\IMT\Back\Tuto-Web-service\src\main\java\com\imt\framework\web\tuto\entities\EtatEnum.java
 C:\IMT\Back\Tuto-Web-service\src\main\java\com\imt\framework\web\tuto\entities\Plat.java
+C:\IMT\Back\Tuto-Web-service\src\main\java\com\imt\framework\web\tuto\entities\Token.java
 C:\IMT\Back\Tuto-Web-service\src\main\java\com\imt\framework\web\tuto\TutoApplication.java
+C:\IMT\Back\Tuto-Web-service\src\main\java\com\imt\framework\web\tuto\repositories\TokenRepository.java

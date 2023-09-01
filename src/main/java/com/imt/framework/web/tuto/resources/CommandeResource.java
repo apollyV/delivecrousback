@@ -1,5 +1,6 @@
 package com.imt.framework.web.tuto.resources;
 
+import com.imt.framework.web.tuto.annotation.Authenticated;
 import com.imt.framework.web.tuto.entities.Commande;
 import com.imt.framework.web.tuto.repositories.CommandeRepository;
 import com.imt.framework.web.tuto.repositories.UtilisateurRepository;
@@ -12,6 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Path("/orders")
+@Authenticated
 public class CommandeResource {
 
     @Autowired
@@ -22,6 +24,7 @@ public class CommandeResource {
 
     @GET
     @Produces("application/json")
+    @Authenticated
     public List<Commande> getOrders(){
         return commandeRepository.findAll();
     }

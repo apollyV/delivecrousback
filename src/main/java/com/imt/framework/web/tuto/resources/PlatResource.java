@@ -1,5 +1,6 @@
 package com.imt.framework.web.tuto.resources;
 
+import com.imt.framework.web.tuto.annotation.Authenticated;
 import com.imt.framework.web.tuto.entities.Plat;
 import com.imt.framework.web.tuto.repositories.PlatRepository;
 import jakarta.validation.constraints.NotNull;
@@ -11,6 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Path("/dishes")
+@Authenticated
 public class PlatResource {
 
     @Autowired

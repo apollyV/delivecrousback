@@ -1,5 +1,7 @@
 package com.imt.framework.web.tuto.config;
 
+import com.imt.framework.web.tuto.filter.AuthenticationFilter;
+import com.imt.framework.web.tuto.resources.TokenResource;
 import com.imt.framework.web.tuto.resources.UtilisateurResource;
 import com.imt.framework.web.tuto.resources.PlatResource;
 import com.imt.framework.web.tuto.resources.CommandeResource;
@@ -16,5 +18,7 @@ public class JerseyConfig extends ResourceConfig {
         register(UtilisateurResource.class);
         register(PlatResource.class);
         register(CommandeResource.class);
+        register(TokenResource.class);
+        register(AuthenticationFilter.class);
     }
 }

@@ -16,7 +16,12 @@ public class Commande {
 
     private String adresseLivraison;
 
-    @OneToMany
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "commande_plats",
+            joinColumns = @JoinColumn(name = "commande_id"),
+            inverseJoinColumns = @JoinColumn(name = "plat_id")
+    )
     private List<Plat> plats;
 
     @ManyToOne

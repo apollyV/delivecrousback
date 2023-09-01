@@ -1,29 +1,40 @@
 package com.imt.framework.web.tuto.service;
 
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import com.imt.framework.web.tuto.entities.Token;
+import com.imt.framework.web.tuto.entities.Utilisateur;
+import com.imt.framework.web.tuto.repositories.TokenRepository;
 
-import java.util.HashSet;
-import java.util.Set;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
 import java.util.UUID;
 
+
+@Service
 public class TokenService {
 
-    private static Set<String> validTokens = new HashSet<>();
+    @Autowired
+    private TokenRepository tokenRepository;
 
-    private static BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+    private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-    public static String generateNewToken() {
-        String token = UUID.randomUUID().toString();
-        validTokens.add(passwordEncoder.encode(token));
-        return token;
+    // Génère un Token, il est renvoyé au client, et encodé puis stocké dans la base
+    public String createToken(Utilisateur user) {
+        String value = UUID.randomUUID().toString();
+        Token token = new Token();
+        token.setTokenValue(passwordEncoder.encode(value));
+        token.setExpiration(LocalDate.now().plusDays(10));
+        token.setUtilisateur(user);
+        tokenRepository.save(token);
+        return value;
     }
 
-    public static boolean isValid(String token) {
-        return validTokens.contains(passwordEncoder.encode(token));
-    }
-
-    public static void removeToken(String token) {
-        validTokens.remove(token);
+    // Lance la fonction de nettoyage des token perimé toutes les 5 minutes
+    @Scheduled(fixedRate = 5 * 60 * 1000)
+    public void cleanUpExpiredTokens() {
+        tokenRepository.deleteExpiredTokens();
     }
 }
-
