@@ -5,6 +5,7 @@ import lombok.*;
 
 @Data
 @Entity
+@AllArgsConstructor
 public class Plat {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
