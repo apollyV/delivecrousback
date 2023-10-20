@@ -5,6 +5,7 @@ import lombok.*;
 
 @Data
 @Entity
+@NoArgsConstructor
 @AllArgsConstructor
 public class Plat {
     @Id

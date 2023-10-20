@@ -11,14 +11,17 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Path("/orders")
 @Authenticated
+@CrossOrigin(origins = "*")
 public class CommandeResource {
 
     @Autowired
@@ -52,16 +55,18 @@ public class CommandeResource {
 
     @PATCH
     @Consumes
+    @Path("/addPlat")
     public Response addPlat( @NotNull @RequestBody Plat plat, @HeaderParam("Authorization") String tokenValue ) {
         Utilisateur utilisateur = this.utilisateurResource.verifyToken(tokenValue);
         List<Commande> commandesEnCours = commandeRepository.findByUtilisateur(utilisateur)
-                                                .stream()
-                                                .filter(commande -> commande.getEtat().equals(EtatEnum.CHOIX_EN_COURS))
-                                                .toList();
+                .stream()
+                .filter(commande -> commande.getEtat().equals(EtatEnum.CHOIX_EN_COURS))
+                .toList();
         if (commandesEnCours.isEmpty()) {
             Commande nouvelleCommande = new Commande();
-            List<Plat> plats = nouvelleCommande.getPlats();
-            plats.add(plat);
+            // Assurez-vous que la liste des plats est initialisée
+            List<Plat> plats = new ArrayList<>(); // Initialisez ici
+            plats.add(plat); // Ajoutez le plat
             nouvelleCommande.setPlats(plats);
             nouvelleCommande.setEtat(EtatEnum.CHOIX_EN_COURS);
             nouvelleCommande.setUtilisateur(utilisateur);
@@ -69,8 +74,11 @@ public class CommandeResource {
         } else {
             Commande orderToUpdate = commandesEnCours.get(0);
             List<Plat> plats = orderToUpdate.getPlats();
+            if (plats == null) {
+                plats = new ArrayList<>(); // Initialisez si null
+                orderToUpdate.setPlats(plats); // Mettez à jour la commande avec la nouvelle liste
+            }
             plats.add(plat);
-            orderToUpdate.setPlats(plats);
             commandeRepository.save(orderToUpdate);
         }
         return Response.status(Response.Status.OK).entity("Le plat a été ajouté").build();

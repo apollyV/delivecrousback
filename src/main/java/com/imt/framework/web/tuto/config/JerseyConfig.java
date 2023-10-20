@@ -9,10 +9,12 @@ import jakarta.ws.rs.ApplicationPath;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 @Component
 @ApplicationPath("delivecrous")
 @Configuration
+@CrossOrigin(origins = "*")
 public class JerseyConfig extends ResourceConfig {
     public JerseyConfig(){
         register(UtilisateurResource.class);
