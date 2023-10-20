@@ -24,37 +24,4 @@ public class PlatResource {
         return platRepository.findAll();
     }
 
-    @POST
-    @Consumes("application/json")
-    public void createDish(@NotNull @RequestBody Plat plat){
-        platRepository.save(plat);
-    }
-
-    @PATCH
-    @Consumes
-    @Path("/{id}")
-    public void updateDish(@NotNull @PathParam("id") Long id, @NotNull @RequestBody Plat plat) throws Exception {
-        Optional<Plat> p = platRepository.findById(id);
-
-        if(p.isEmpty()) {
-            throw new Exception("Plat inconnu");
-        }
-        else {
-            Plat dishToUpdate = p.get();
-            dishToUpdate.setImage(plat.getImage());
-            dishToUpdate.setTitre(plat.getTitre());
-            dishToUpdate.setDescription(plat.getDescription());
-            dishToUpdate.setPrix(plat.getPrix());
-            dishToUpdate.setAllergene(plat.getAllergene());
-            dishToUpdate.setCategory(plat.getCategory());
-
-            platRepository.save(dishToUpdate);
-        }
-    }
-
-    @DELETE
-    @Path("/{id}")
-    public void deleteDish(@NotNull @PathParam("id") final Long id){
-        platRepository.deleteById(id);
-    }
 }

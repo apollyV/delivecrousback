@@ -7,12 +7,11 @@ import java.util.List;
 
 @Data
 @Entity
+@NoArgsConstructor
 public class Commande {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    private int quantite;
 
     private String adresseLivraison;
 

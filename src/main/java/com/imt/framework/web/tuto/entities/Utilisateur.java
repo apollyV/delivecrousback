@@ -17,4 +17,5 @@ public class Utilisateur {
     private String username;
     private String password;
     private Double solde;
+    private String adresse;
 }

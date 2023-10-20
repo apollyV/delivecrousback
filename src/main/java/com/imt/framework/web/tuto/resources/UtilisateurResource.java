@@ -65,6 +65,7 @@ public class UtilisateurResource {
             userToUpdate.setNom(utilisateur.getNom());
             userToUpdate.setPrenom(utilisateur.getPrenom());
             userToUpdate.setUsername(utilisateur.getUsername());
+            userToUpdate.setAdresse(utilisateur.getAdresse());
             // Si le mot de passe est fourni dans la mise à jour, le hasher avant de l'enregistrer
             if(utilisateur.getPassword() != null && !utilisateur.getPassword().isEmpty()) {
                 userToUpdate.setPassword(passwordEncoder.encode(utilisateur.getPassword()));
@@ -94,11 +95,12 @@ public class UtilisateurResource {
         return null;
     }
 
-    // Vérifie si l'utilisateur est bien connecté en utilisant le token et si sa date d'expiration est valide, et mets à jour la date d'expiration
+    // Vérifie si l'utilisateur est bien connecté en utilisant le token et si sa date d'expiration est valide, et mets à jour la date d'expiration.
+    // L'Utilisateur lié à ce token est renvoyé s'il existe
     @GET
     @Path("/verify")
     @Produces("application/json")
-    public boolean verifyToken(@HeaderParam("Authorization") String tokenValue) {
+    public Utilisateur verifyToken(@HeaderParam("Authorization") String tokenValue) {
         List<Token> allTokens = tokenRepository.findAll();
 
         for (Token storedToken : allTokens) {
@@ -106,12 +108,12 @@ public class UtilisateurResource {
                 if (storedToken.getExpiration().isAfter(LocalDate.now())) {
                     storedToken.setExpiration(LocalDate.now().plusDays(10));
                     tokenRepository.save(storedToken);
-                    return true;
+                    return storedToken.getUtilisateur();
                 }
                 break;
             }
         }
-        return false;
+        return null;
     }
 
     @DELETE
